@@ -1,0 +1,32 @@
+.recipe-card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+  }
+  
+  .recipe-card-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+  
+  .recipe-card-title {
+    margin: 10px 0;
+  }
+  
+  .recipe-card-description {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 10px;
+  }
+  
+  .recipe-card-time span {
+    display: block;
+    font-size: 0.8rem;
+    color: #333;
+    margin: 5px 0;
+  }
+  

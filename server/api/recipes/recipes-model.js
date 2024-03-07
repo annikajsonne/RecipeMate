@@ -1,20 +1,24 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import mongoose from 'mongoose';
 
 const IngredientSchema = new mongoose.Schema({
-  name: String,
-  quantity: String
+    name: {type: String, required: true},
+    amount: {type: String, required: true}
 });
 
 const RecipeSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  description: { type: String, required: true },
-  pictureUrl: { type: String, required: false },
-  prepTime: { type: Number, required: true },
-  cookingTime: { type: Number, required: true },
-  directions: [String],
-  ingredients: [IngredientSchema],
-  userReviews: [{ type: Schema.Types.ObjectId, ref: 'Review' }] 
+    name: {type: String, required: true},
+    description: {type: String, required:true},
+    image: {type: String, required: true},
+    prepTime: {type: Number, required: true},
+    cookTime: {type: Number, required: true},
+    directions: [{
+        type: String, 
+        required: true
+    }],
+    ingredients: [ IngredientSchema
+    ],
+    userReviews: [{type: mongoose.Schema.Types.ObjectId, ref: 'Reviews'}]
 });
 
-module.exports = mongoose.model('Recipe', RecipeSchema);
+let Recipe = mongoose.model('Recipe', RecipeSchema);
+export {Recipe};

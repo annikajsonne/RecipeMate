@@ -1,20 +1,15 @@
-const express = require('express');
+import express from 'express';
+import { createRecipe, getAllRecipes, getRecipe, updateRecipe, deleteRecipe } from './recipes-controller.js';
+import reviewRouter from '../reviews/reviews-routes.js';
+
 const router = express.Router();
-const recipesController = require('./recipes-controller');
 
-// Route to create a new recipe
-router.post('/', recipesController.create);
+router.use('/:recipeId/reviews', reviewRouter);
 
-// Route to get all recipes
-router.get('/', recipesController.findAll);
+router.post('/', createRecipe);
+router.get('/', getAllRecipes);
+router.get('/:id', getRecipe);
+router.put('/:id', updateRecipe);
+router.delete('/:id', deleteRecipe);
 
-// Route to get a single recipe by id
-router.get('/:id', recipesController.findOne);
-
-// Route to update a recipe by id
-router.put('/:id', recipesController.update);
-
-// Route to delete a recipe by id
-router.delete('/:id', recipesController.delete);
-
-module.exports = router;
+export default router

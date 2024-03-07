@@ -1,86 +1,91 @@
-const Review = require('./reviews-model.js');
-const Recipe = require('../recipes/recipes-model');
-const User = require('../users/users-model');
+import {Reviews} from './reviews-model.js';
+import {Recipe} from '../recipes/recipes-model.js';
 
-exports.createReview = async (req, res) => {
-    const { recipeId, description, rating, username } = req.body;
+export async function createReview(req, res){
 
     try {
-        // Find the user by username
-        const user = await User.findOne({ username: username });
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+        const {description, rating, user} = req.body;
+        const recipeId = req.params.recipeId;
+        const recipe = await Recipe.findById(recipeId);
+
+        if (!recipe) {
+            console.log("Recipe not found");
+            return res.status(404).json({message: "Recipe not found"});
+            
         }
 
-        // Create the review with the user's ObjectId
-        const newReview = new Review({
+        const newReview = new Reviews({
             description,
             rating,
-            user: user._id, // Use the found user's ObjectId
+            user,
         });
 
         const savedReview = await newReview.save();
-
-        // Optionally, add the review to the recipe's userReviews array
-        const recipe = await Recipe.findById(recipeId);
-        if (recipe) {
-            recipe.userReviews.push(savedReview._id);
-            await recipe.save();
-        }
-
-        res.status(201).json(savedReview);
+        recipe.userReviews.push(savedReview);
+        await recipe.save();
+        res.status(201).json(newReview);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        if (error.name === "ValidationError") {
+            return res.status(400).json({ message: error.message });
+        } else { 
+            res.status(500).json({ message: error.message });
+        }
     }
 };
 
-// Get all reviews
-exports.getAllReviews = async (req, res) => {
+export async function getAllReviews(req, res){
     try {
-        const reviews = await Review.find();
-        res.json(reviews);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-};
-
-// Get a single review
-exports.getReview = async (req, res) => {
-    try {
-        const review = await Review.findById(req.params.id);
-        if (!review) {
-            return res.status(404).json({ message: 'Review not found' });
+        const recipeId = req.params.recipeId;
+        const recipe = await Recipe.findById(recipeId).populate('userReviews');
+        if (!recipe) {
+            return res.status(404).json({message: "Recipe not found"});
         }
-        res.json(review);
+        res.status(200).json(recipe.userReviews);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
 
-// Update a review
-exports.updateReview = async (req, res) => {
+export async function getReview(req, res){
     try {
-        const review = await Review.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const review = await Reviews.findById(req.params.id);
         if (!review) {
-            return res.status(404).json({ message: 'Review not found' });
+            return res.status(404).json({message: "Review not found"});
         }
-        res.json(review);
+        res.status(200).json(review);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        res.status(500).json({ message: error.message });
     }
 };
 
-// Delete a review
-exports.deleteReview = async (req, res) => {
+export async function updateReview(req, res){
     try {
-        const review = await Review.findByIdAndDelete(req.params.id);
+        const review = await Reviews.findByIdAndUpdate(
+            req.params.id, 
+            req.body, 
+            { new: true, runValidators: true }); 
         if (!review) {
-            return res.status(404).json({ message: 'Review not found' });
+            return res.status(404).json({message: "Review not found"});
         }
+        res.status(200).json(review);
+    } catch (error) {
+        if (error.name === "ValidationError") {
+            return res.status(400).json({ message: error.message });
+        } else { 
+            res.status(500).json({ message: error.message });
+        }
+    }
+};
 
+export async function deleteReview(req, res) {
+    try {
+        const review = await Reviews.findByIdAndDelete(req.params.id);
+        if (!review) {
+            return res.status(404).json({message: "Review not found"});
+        }
         await Recipe.updateMany({}, { $pull: { userReviews: review._id } });
-
-        res.status(204).send();
+        
+        res.status(201).json(review);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

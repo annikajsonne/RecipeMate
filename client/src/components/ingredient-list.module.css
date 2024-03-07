@@ -1,0 +1,23 @@
+.ingredient-list {
+    margin: 20px 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .ingredient-list h4 {
+    margin-bottom: 10px;
+  }
+  
+  .ingredient-list li {
+    margin: 5px 0;
+    padding-left: 15px;
+    position: relative;
+  }
+  
+  .ingredient-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--primary-color); 
+  }
+  

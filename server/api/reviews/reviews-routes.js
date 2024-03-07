@@ -1,11 +1,13 @@
-const express = require('express');
-const router = express.Router();
-const reviewsController = require('./reviews-controller');
+import express from 'express';
 
-router.post('/', reviewsController.createReview);
-router.get('/', reviewsController.getAllReviews);
-router.get('/:id', reviewsController.getReview);
-router.put('/:id', reviewsController.updateReview);
-router.delete('/:id', reviewsController.deleteReview);
+import { createReview, getAllReviews, getReview, updateReview, deleteReview } from './reviews-controller.js';
 
-module.exports = router;
+const router = express.Router({mergeParams: true});
+
+router.post('/', createReview);
+router.get('/', getAllReviews);
+router.get('/:id', getReview);
+router.put('/:id', updateReview);
+router.delete('/:id', deleteReview);
+
+export default router;
