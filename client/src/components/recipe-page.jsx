@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import Review from './reviews';
 import { load_recipe_detail } from '../data/recipes-loader';
-
-// import styles from './recipe-detail.module.css'; // Ensure this file exists and contains relevant styles
+import ReviewForm from './create-update-reviews';
+import styles from './recipe-page.module.css'
 
 const RecipeDetail = () => {
     const { id: recipeId } = useParams();
@@ -12,8 +12,6 @@ const RecipeDetail = () => {
     const [error, setError] = useState(null);
     const [reviews, setReviews] = useState([]);
     const navigate = useNavigate();
-    console.log('Params:', useParams()); // Should log the params object
-    console.log('Recipe ID:', recipeId); // Should log the actual recipe ID
 
     const handleDelete = async () => {
         const confirmDelete = window.confirm('Are you sure you want to delete this recipe?');
@@ -25,7 +23,7 @@ const RecipeDetail = () => {
             if (!response.ok) {
               throw new Error('Network response was not ok');
             }
-            navigate('/all-recipes'); // Redirect to the list of recipes after deletion
+            navigate('/all-recipes'); 
           } catch (err) {
             setError(err.message);
           }
@@ -36,14 +34,13 @@ const RecipeDetail = () => {
     useEffect(() => {
       setIsLoading(true);
   
-      // Use the loader function to fetch the recipe details
       load_recipe_detail({ params: { id: recipeId } })
         .then((loadedRecipe) => {
           setRecipe(loadedRecipe);
           if (!loadedRecipe) {
             throw new Error(`No recipe found for ID: ${recipeId}`);
           }
-          return fetch(`/api/recipes/${recipeId}/reviews`); // Chain the review fetch after recipe
+          return fetch(`/api/recipes/${recipeId}/reviews`); 
         })
         .then((response) => {
           if (!response.ok) {
@@ -61,7 +58,7 @@ const RecipeDetail = () => {
           setIsLoading(false);
         });
   
-    }, [recipeId]); // Dependency array to ensure the effect is run when recipeId changes
+    }, [recipeId]); 
   
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
@@ -86,7 +83,7 @@ const RecipeDetail = () => {
           <li key={index}>{step}</li>
         ))}
       </ol>
-      <Link to={`/create-update-recipe/${recipeId}`}>Edit Recipe</Link>
+      <Link to={`/create-update-recipe/${recipeId}`} className={styles.button}>Edit Recipe</Link>
       <h2>User Reviews</h2>
       <ReviewForm recipeId={recipeId} setReviews={setReviews} />
       {reviews.length > 0 ? (
@@ -96,7 +93,7 @@ const RecipeDetail = () => {
       ) : (
         <p>No reviews yet.</p>
       )}
-      <button onClick={handleDelete}>Delete Recipe</button>
+      <button className={styles.button} onClick={handleDelete}>Delete Recipe</button>
     </div>
   );
 };

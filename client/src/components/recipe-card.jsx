@@ -1,14 +1,18 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './recipe-card.module.css';
 
 const RecipeCard = ({ recipe }) => {
-    console.log('Recipe in RecipeCard:', recipe);
-
+    const navigate = useNavigate();
     const formatTime = (time) => `${time} minutes`;
 
+    const handleCardClick = () => {
+        navigate(`/recipes/${recipe._id}`); 
+    };
+
     return (
-        <div className={styles.recipeCard}>
-            {recipe.pictureUrl && <img src={recipe.image} alt={recipe.name} className={styles.recipeCardImage} />}
+        <div className={styles.recipeCard} onClick={handleCardClick}>
+            {recipe.pictureUrl && <img src={recipe.pictureUrl} alt={recipe.name} className={styles.recipeCardImage} />}
             <h3 className={styles.recipeCardTitle}>{recipe.name}</h3>
             <p className={styles.recipeCardDescription}>{recipe.description}</p>
             <div className={styles.recipeCardTime}>

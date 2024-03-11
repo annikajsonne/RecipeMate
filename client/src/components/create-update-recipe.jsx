@@ -7,7 +7,7 @@ export default function CreateUpdateRecipe() {
   const recipe = useLoaderData();
   const [ingredients, setIngredients] = useState(recipe?.ingredients || [{ name: '', amount: '' }]);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     if (recipe && recipe.ingredients) {
       setIngredients(recipe.ingredients);
@@ -53,7 +53,7 @@ export default function CreateUpdateRecipe() {
         const responseData = await response.json();
         console.log('Success:', responseData);
         alert('Recipe saved successfully!');
-        navigate('/all-recipes'); // Redirect to the list of recipes after success
+        navigate('/'); 
       } else {
         const errorText = await response.text();
         throw new Error(`Server responded with ${response.status}: ${errorText}`);
