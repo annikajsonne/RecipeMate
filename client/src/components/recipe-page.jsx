@@ -86,7 +86,7 @@ const RecipeDetail = () => {
           <li key={index}>{step}</li>
         ))}
       </ol>
-      <Link to={`/update-recipe/${recipeId}`}>Edit Recipe</Link>
+      <Link to={`/create-update-recipe/${recipeId}`}>Edit Recipe</Link>
       <h2>User Reviews</h2>
       {reviews.length > 0 ? (
         reviews.map((review) => <Review key={review._id} review={review} />)

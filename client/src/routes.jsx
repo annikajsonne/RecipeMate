@@ -16,7 +16,7 @@ const router = createBrowserRouter([
       { path: '/', element: <HomePage />, index: true },
       { path: '/all-recipes', element: <AllRecipes /> },
       { path: '/create-update-recipe', element: <CreateUpdateRecipe /> },
-      { path: '/update-recipe/:id', element: <CreateUpdateRecipe />, loader: load_recipe_detail},
+      { path: '/create-update-recipe/:id', element: <CreateUpdateRecipe />, loader: load_recipe_detail},
       { path: '/simple-recipes', element: <SimpleRecipeList />, loader: load_recipe_list},
       { path: '/recipes/:id', element: <RecipeDetail />, loader: load_recipe_detail}
     ],
