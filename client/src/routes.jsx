@@ -10,34 +10,17 @@ import { load_recipe_list, load_recipe_detail } from './data/recipes-loader';
 
 const router = createBrowserRouter([
     {
-        path: '/recipes',
-        element: <RecipeList />,
-        loader: load_recipe_list,  // Use the loader function for the list
-    },
-    {
-        path: '/recipes/:id',
-        element: <RecipeDetail />,
-        loader: load_recipe_detail,  // Use the loader function for details
-    },
-    {
     path: '/',
     element: <Root />,
     children: [
       { path: '/', element: <HomePage />, index: true },
       { path: '/all-recipes', element: <AllRecipes /> },
       { path: '/create-update-recipe', element: <CreateUpdateRecipe /> },
+      { path: '/update-recipe/:id', element: <CreateUpdateRecipe />, loader: load_recipe_detail},
+      { path: '/simple-recipes', element: <SimpleRecipeList />, loader: load_recipe_list},
+      { path: '/recipes/:id', element: <RecipeDetail />, loader: load_recipe_detail}
     ],
     },
-    {
-        path: '/simple-recipes',
-        element: <SimpleRecipeList />,
-        loader: load_recipe_list,  // use the loader function here
-    },
-    {
-      path: '/update-recipe/:id',
-      element: <CreateUpdateRecipe />,
-      loader: load_recipe_detail,
-    }
     
 ]);
 
