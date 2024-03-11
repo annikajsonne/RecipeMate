@@ -88,8 +88,11 @@ const RecipeDetail = () => {
       </ol>
       <Link to={`/create-update-recipe/${recipeId}`}>Edit Recipe</Link>
       <h2>User Reviews</h2>
+      <ReviewForm recipeId={recipeId} setReviews={setReviews} />
       {reviews.length > 0 ? (
-        reviews.map((review) => <Review key={review._id} review={review} />)
+        reviews.map((review) => (
+          <Review key={review._id} review={review} setReviews={setReviews} />
+        ))
       ) : (
         <p>No reviews yet.</p>
       )}
