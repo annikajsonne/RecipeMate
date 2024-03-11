@@ -1,11 +1,13 @@
 import { useLoaderData, Link, Form } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import styles from './create-update-recipe.module.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function CreateUpdateRecipe() {
   const recipe = useLoaderData();
   const [ingredients, setIngredients] = useState(recipe?.ingredients || [{ name: '', amount: '' }]);
-
+  const navigate = useNavigate();
+  
   useEffect(() => {
     if (recipe && recipe.ingredients) {
       setIngredients(recipe.ingredients);
@@ -30,8 +32,41 @@ export default function CreateUpdateRecipe() {
     setIngredients(ingredients.filter((_, i) => i !== index));
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const json = Object.fromEntries(formData.entries());
+
+    const method = recipe ? 'PUT' : 'POST';
+    const url = recipe ? `/api/recipes/${recipe._id}` : '/api/recipes';
+
+    try {
+      const response = await fetch(url, {
+        method: method,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(json),
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log('Success:', responseData);
+        alert('Recipe saved successfully!');
+        navigate('/all-recipes'); // Redirect to the list of recipes after success
+      } else {
+        const errorText = await response.text();
+        throw new Error(`Server responded with ${response.status}: ${errorText}`);
+      }
+    } catch (err) {
+      console.error('Error submitting form:', err);
+      alert(`An error occurred: ${err.message}`);
+    }
+  };
+
+
   return (
-    <Form action={recipe ? `/api/recipes/update/${recipe._id}` : '/api/recipes/create'} method="post" className={styles.form}>
+    <Form onSubmit={handleSubmit} className={styles.form}>
       <h2>{recipe ? 'Update Recipe' : 'Create Recipe'}</h2>
       <div className={styles.formSection}>
         <label className={styles.formLabel}>
@@ -89,13 +124,10 @@ export default function CreateUpdateRecipe() {
       <div className={styles.formSection}>
         <label className={styles.formLabel}>
           Image URL:
-          <input type="url" name="pictureUrl" defaultValue={recipe?.pictureUrl || ''} className={styles.formInput} />
+          <input type="url" name="image" defaultValue={recipe?.image || ''} className={styles.formInput} />
         </label>
       </div>
       <input type="submit" value={recipe ? 'Update Recipe' : 'Create Recipe'} className={styles.formSubmitButton} />
-
-      {/* Link to navigate back to the recipe list */}
-      <Link to="/all-recipes" className={styles.formBackLink}>Return to Recipe List</Link>
     </Form>
   );
 }
