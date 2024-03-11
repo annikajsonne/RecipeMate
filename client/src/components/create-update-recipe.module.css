@@ -1,0 +1,96 @@
+.form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  .formSection {
+    margin-bottom: 20px;
+  }
+  
+  .formLabel {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .formInput, .formTextarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+  
+  .formTextarea {
+    height: 100px;
+    resize: vertical;
+  }
+  
+  .ingredientSection {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .ingredientInput {
+    flex: 1;
+    margin-right: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .removeButton, .addButton {
+    padding: 10px 15px;
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 5px;
+  }
+  
+  .removeButton:hover, .addButton:hover {
+    background-color: #c9302c;
+  }
+  
+  .addButton {
+    background-color: #5cb85c;
+  }
+  
+  .addButton:hover {
+    background-color: #4cae4c;
+  }
+  
+  .formSubmitButton {
+    width: 100%;
+    padding: 10px 15px;
+    border: none;
+    background-color: #5bc0de;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .formSubmitButton:hover {
+    background-color: #31b0d5;
+  }
+  
+  .formBackLink {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #5bc0de;
+    text-decoration: none;
+  }
+  
+  .formBackLink:hover {
+    text-decoration: underline;
+  }
+  

@@ -21,16 +21,16 @@ export function load_recipe_list() {
     });
 }
 
-export function load_recipe_detail({ params }) {
-  fetch(`${BACKEND_URL}api/recipes/${params.id}`)
-      .then(response => {
-          if (!response.ok) {
-              throw new Error('Network response was not ok');
-          }
-          return response.json();
-      })
-      .then(data => {
-          console.log(`Fetched recipe detail for ${params.id}:`, data);
-          return data;
-      });
-}
+export async function load_recipe_detail({ params }) {
+    try {
+      const response = await fetch(`/api/recipes/${params.id}`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const recipe = await response.json();
+      return recipe; // Must return the data
+    } catch (error) {
+      // Handle error appropriately
+      return null; // Return null if there's an error
+    }
+  }
