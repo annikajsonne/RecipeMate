@@ -7,6 +7,10 @@
   background-color: white;
   cursor: pointer; 
   transition: transform 0.2s ease, box-shadow 0.2s ease; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
 }
 
 .recipeCard:hover {
@@ -14,11 +18,12 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.recipe-image {
-  width: 100%; /* Set width to 100% of the container */
-  height: 300px; /* Set a fixed height to maintain square shape */
+.recipeCardImage {
+  width: 100px; /* Set width to 100% of the container */
+  height: 100px; /* Set a fixed height to maintain square shape */
   object-fit: cover; /* This ensures the image covers the area nicely */
   border-radius: 4px;
+  margin-bottom: 10px;
 }
 
 .recipeCardTitle {
@@ -36,4 +41,9 @@
   font-size: 0.8rem;
   color: #333;
   margin: 5px 0;
+}
+
+.recipeCardContent {
+  flex-grow: 1;  
+  margin-right: 20px; 
 }

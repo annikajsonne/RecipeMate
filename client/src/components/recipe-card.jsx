@@ -12,14 +12,16 @@ const RecipeCard = ({ recipe }) => {
 
     return (
         <div className={styles.recipeCard} onClick={handleCardClick}>
-            <img src={recipe.image} alt={recipe.name} className={styles.recipeCardImage} />
-            <h3 className={styles.recipeCardTitle}>{recipe.name}</h3>
-            <p className={styles.recipeCardDescription}>{recipe.description}</p>
-            <div className={styles.recipeCardTime}>
-                <div>Prep Time: {formatTime(recipe.prepTime)}</div>
-                <div>Cooking Time: {formatTime(recipe.cookTime)}</div>
-                <div>Total Time: {formatTime(recipe.prepTime + recipe.cookTime)}</div>
+            <div className={styles.recipeCardContent}>
+                <h3 className={styles.recipeCardTitle}>{recipe.name}</h3>
+                <p className={styles.recipeCardDescription}>{recipe.description}</p>
+                <div className={styles.recipeCardTime}>
+                    <div>Prep Time: {formatTime(recipe.prepTime)}</div>
+                    <div>Cooking Time: {formatTime(recipe.cookTime)}</div>
+                    <div>Total Time: {formatTime(recipe.prepTime + recipe.cookTime)}</div>
+                </div>
             </div>
+            <img src={recipe.image} alt={recipe.name} className={styles.recipeCardImage} />
         </div>
     );
 };
