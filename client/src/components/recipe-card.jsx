@@ -12,7 +12,7 @@ const RecipeCard = ({ recipe }) => {
 
     return (
         <div className={styles.recipeCard} onClick={handleCardClick}>
-            {recipe.image && <img src={recipe.image} alt={recipe.name} className={styles.recipeCardImage} />}
+            <img src={recipe.image} alt={recipe.name} className={styles.recipeCardImage} />
             <h3 className={styles.recipeCardTitle}>{recipe.name}</h3>
             <p className={styles.recipeCardDescription}>{recipe.description}</p>
             <div className={styles.recipeCardTime}>
