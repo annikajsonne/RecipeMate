@@ -1,11 +1,19 @@
 .navbar {
-    background-color: #333; 
-    color: white;
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 1rem;
-    justify-content: space-between;
-  }
+  background-color: #333;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  justify-content: space-between;
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  z-index: 1000;
+}
+body {
+  padding-top: 50px; 
+}
   
   .navMenu {
     display: flex;
