@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { load_recipe_list } from '../data/recipes-loader';
+import styles from './simple-recipe-list.module.scss';
 
 const SimpleRecipeList = () => {
   const [recipes, setRecipes] = useState([]);

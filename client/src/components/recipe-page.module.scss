@@ -41,3 +41,15 @@
     background-color: #2874a6;
   }
 }
+.ingredients ul,
+.directions ol {
+  padding-left: 0; // Removes indentation of list
+  margin: 0; // Removes default margin from lists
+
+  li {
+    margin: 0; // Removes space between list items
+    padding: 0; // Removes default padding from list items
+  }
+}
+
+
