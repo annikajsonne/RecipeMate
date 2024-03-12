@@ -30,7 +30,7 @@
     resize: vertical;
   }
   
-  .ingredientSection, .directionSection {
+  .ingredientSection {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
@@ -44,11 +44,24 @@
     border-radius: 4px;
   }
   
-  .directionInput {
-    margin-top: 5px; // Adds space above the textarea if needed
-    min-height: 50px; // Ensures the text area is not too small
-    resize: vertical; // Allows resizing the textarea vertically
+  .directionSection {
+    // Remove any flex properties if they exist.
+    margin-bottom: 20px;
   }
+  
+  .directionInputContainer {
+    display: flex;
+    align-items: center;
+  }
+  
+  .directionInput {
+    flex: 1;
+    margin-right: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
   
   .removeButton, .addButton {
     padding: 10px 15px;
@@ -66,6 +79,7 @@
   
   .addButton {
     background-color: #5cb85c;
+    margin-bottom: 20px;
   }
   
   .addButton:hover {

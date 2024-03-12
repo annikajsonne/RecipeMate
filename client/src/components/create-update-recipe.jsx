@@ -66,28 +66,30 @@ export default function CreateUpdateRecipe() {
       // Check if key matches the pattern for ingredients
       let match = key.match(/^ingredients\[(\d+)\]\[(name|amount)\]$/);
       if (match) {
-        const [ , index, field ] = match;
-        if (!ingredients[index]) ingredients[index] = { name: '', amount: '' };
+        const [, index, field] = match;
+        if (!ingredients[index]) ingredients[index] = { name: "", amount: "" };
         ingredients[index][field] = value;
         continue; // Skip further processing for this key-value pair
       }
-  
+
       // Check if key matches the pattern for directions
       match = key.match(/^directions\[(\d+)\]$/);
       if (match) {
-        const [ , index ] = match;
+        const [, index] = match;
         directions[index] = value; // each direction is just a string
       }
     }
 
     const json = {
-      name: formData.get('name'),
-      description: formData.get('description'),
-      prepTime: formData.get('prepTime'),
-      cookTime: formData.get('cookTime'),
-      image: formData.get('image'),
-      ingredients: ingredients.filter(ingredient => ingredient.name && ingredient.amount), // filter out empty ingredients
-      directions: directions.filter(direction => direction) // filter out empty directions
+      name: formData.get("name"),
+      description: formData.get("description"),
+      prepTime: formData.get("prepTime"),
+      cookTime: formData.get("cookTime"),
+      image: formData.get("image"),
+      ingredients: ingredients.filter(
+        (ingredient) => ingredient.name && ingredient.amount
+      ), // filter out empty ingredients
+      directions: directions.filter((direction) => direction), // filter out empty directions
     };
 
     console.log("Form data submitted:", json);
@@ -171,26 +173,26 @@ export default function CreateUpdateRecipe() {
         </label>
       </div>
       <div>
-        <h3>Directions</h3>
+        <label className={styles.formLabel}>Directions</label>
         {directions.map((direction, index) => (
           <div key={index} className={styles.directionSection}>
-            <label>
-              Step {index + 1}:
+            <label>Step {index + 1}:</label>
+            <div className={styles.directionInputContainer}>
               <textarea
                 name={`directions[${index}]`}
                 value={direction}
                 onChange={(e) => handleDirectionChange(index, e.target.value)}
-                className={styles.directionInput}
+                className={`${styles.directionInput} ${styles.formInput}`}
                 required
               />
-            </label>
-            <button
-              type="button"
-              onClick={() => removeDirection(index)}
-              className={styles.removeButton}
-            >
-              Remove
-            </button>
+              <button
+                type="button"
+                onClick={() => removeDirection(index)}
+                className={styles.removeButton}
+              >
+                Remove
+              </button>
+            </div>
           </div>
         ))}
         <button
@@ -201,8 +203,9 @@ export default function CreateUpdateRecipe() {
           Add Step
         </button>
       </div>
+
       <div>
-        <h3>Ingredients</h3>
+        <label className={styles.formLabel}>Ingredients</label>
         {ingredients.map((ingredient, index) => (
           <div key={index} className={styles.ingredientSection}>
             <input
@@ -212,6 +215,7 @@ export default function CreateUpdateRecipe() {
                 handleIngredientChange(index, "name", e.target.value)
               }
               className={styles.ingredientInput}
+              placeholder="Ingredient"
               required
             />
             <input
@@ -221,6 +225,7 @@ export default function CreateUpdateRecipe() {
                 handleIngredientChange(index, "amount", e.target.value)
               }
               className={styles.ingredientInput}
+              placeholder="Amount"
               required
             />
             <button
