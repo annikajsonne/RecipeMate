@@ -64,6 +64,7 @@ const RecipeDetail = () => {
     if (error) return <div>Error: {error}</div>;
     if (!recipe) return <div>Recipe not found.</div>;  
 
+    console.log(recipe);
   return (
     <div>
       <h1>{recipe.name}</h1>
@@ -71,18 +72,23 @@ const RecipeDetail = () => {
       <p>{recipe.description}</p>
       <p>Prep Time: {recipe.prepTime} minutes</p>
       <p>Cook Time: {recipe.cookTime} minutes</p>
-      <h2>Ingredients</h2>
-      <ul>
-        {recipe.ingredients.map((ingredient, index) => (
-          <li key={index}>{ingredient.amount} of {ingredient.name}</li>
-        ))}
-      </ul>
-      <h2>Directions</h2>
-      <ol>
-        {recipe.directions.map((step, index) => (
-          <li key={index}>{step}</li>
-        ))}
-      </ol>
+      <div className="ingredients">
+        <h2>Ingredients</h2>
+        <ul>
+          {recipe.ingredients.map((ingredient, index) => (
+            <li key={index}>{ingredient.name} - {ingredient.amount}</li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="directions">
+        <h2>Directions</h2>
+        <ol>
+          {recipe.directions.map((direction, index) => (
+            <li key={index}>{direction}</li>
+          ))}
+        </ol>
+      </div>
       <Link to={`/create-update-recipe/${recipeId}`} className={styles.button}>Edit Recipe</Link>
       <h2>User Reviews</h2>
       <ReviewForm recipeId={recipeId} setReviews={setReviews} />

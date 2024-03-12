@@ -30,7 +30,7 @@
     resize: vertical;
   }
   
-  .ingredientSection {
+  .ingredientSection, .directionSection {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
@@ -42,6 +42,12 @@
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
+  }
+  
+  .directionInput {
+    margin-top: 5px; // Adds space above the textarea if needed
+    min-height: 50px; // Ensures the text area is not too small
+    resize: vertical; // Allows resizing the textarea vertically
   }
   
   .removeButton, .addButton {
