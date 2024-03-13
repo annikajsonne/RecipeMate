@@ -1,27 +1,45 @@
-ul {
-  list-style-type: none; // removes the default list item bullet
-  padding: 0;
-  margin: 0;
-}
-
-li {
-  margin-bottom: 0.5rem;
-  padding: 0.5rem;
-
-  a {
-    color: white;
-    background-color: #dd702b;
-    text-decoration: none;
-    transition: color 0.3s ease, background-color 0.3s ease;
-    padding: 0.5rem 1rem; // adds padding around the link text
-    border-radius: 4px; // optional rounded corners
-
-    &:hover,
-    &:focus {
-      color: #fff; 
-      background-color: #d89367; 
+.recipeList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .recipeCard {
+    list-style-type: none;
+    text-align: center;
+    margin: 0.5rem;
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    a {
+      text-decoration: none;
     }
   }
-}
-
-
+  
+  .recipeImage {
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+  }
+  
+  .recipeName {
+    background-color: #dd702b;
+    color: white;
+    padding: 0.5rem 1rem;
+    margin: 0;
+    
+    &:hover,
+    &:focus {
+      background-color: #d89367;
+    }
+  }
+  

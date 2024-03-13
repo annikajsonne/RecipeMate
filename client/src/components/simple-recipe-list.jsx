@@ -35,13 +35,16 @@ const SimpleRecipeList = () => {
   }
 
   return (
-    <ul>
+    <div className={styles.recipeList}>
       {recipes.map(recipe => (
-        <li key={recipe._id}>
-          <Link to={`/recipes/${recipe._id}`}>{recipe.name}</Link>
-        </li>
+        <div key={recipe._id} className={styles.recipeCard}>
+          <Link to={`/recipes/${recipe._id}`}>
+            <img src={recipe.image} alt={recipe.name} className={styles.recipeImage} />
+            <h3 className={styles.recipeName}>{recipe.name}</h3>
+          </Link>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 };
 
