@@ -23,6 +23,7 @@ body {
   
   .navItem {
     text-decoration: none;
+    font-style: italic;
     color: white;
     padding: 0.5rem 1rem;
     transition: background-color 0.3s;

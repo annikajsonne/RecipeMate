@@ -1,40 +1,6 @@
-// import React, { useState } from 'react';
-// import axios from 'axios';
-
-// const ReviewForm = ({ recipeId, review, setReviews, isEditing = false }) => {
-//   const [description, setDescription] = useState(review ? review.description : '');
-//   const [rating, setRating] = useState(review ? review.rating : 0);
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     const endpoint = `/api/recipes/${recipeId}/reviews`;
-//     const data = { description, rating };
-//     try {
-//       let response;
-//       if (isEditing) {
-//         response = await axios.put(`${endpoint}/${review._id}`, data);
-//       } else {
-//         response = await axios.post(endpoint, data);
-//       }
-//       setReviews(prev => isEditing ? prev.map(r => r._id === review._id ? response.data : r) : [...prev, response.data]);
-//     } catch (error) {
-//       console.error('Error submitting review', error);
-//     }
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       <textarea value={description} onChange={e => setDescription(e.target.value)} required />
-//       <input type="number" value={rating} onChange={e => setRating(e.target.value)} required />
-//       <button type="submit">{isEditing ? 'Update' : 'Submit'} Review</button>
-//     </form>
-//   );
-// };
-
-// export default ReviewForm;
-
 import React, { useState } from 'react';
 import axios from 'axios';
+import styles from './create-update-reviews.module.scss';
 
 const ReviewForm = ({ recipeId, setReviews }) => {
   const [description, setDescription] = useState('');
@@ -67,28 +33,31 @@ const ReviewForm = ({ recipeId, setReviews }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="user">User:</label>
+    <form onSubmit={handleSubmit} className={styles.reviewForm}>
+      <h3 className={styles.reviewFormTitle}>Add a Review</h3>
+      <label htmlFor="user" className={styles.reviewLabel}>User:</label>
       <input
-        name="user" // Add the name attribute
+        name="user"
         id="user"
         value={user}
         onChange={(e) => setUser(e.target.value)}
         required
+        className={styles.reviewInput}
       />
 
-      <label htmlFor="description">Review Description:</label>
+      <label htmlFor="description" className={styles.reviewLabel}>Review Description:</label>
       <textarea
-        name="description" // Add the name attribute
+        name="description"
         id="description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         required
+        className={styles.reviewTextarea}
       />
 
-      <label htmlFor="rating">Rating:</label>
+      <label htmlFor="rating" className={styles.reviewLabel}>Rating:</label>
       <input
-        name="rating" // Add the name attribute
+        name="rating"
         type="number"
         id="rating"
         value={rating}
@@ -96,11 +65,11 @@ const ReviewForm = ({ recipeId, setReviews }) => {
         max="5"
         onChange={(e) => setRating(e.target.value)}
         required
+        className={styles.reviewInput}
       />
 
-      <button type="submit">Submit Review</button>
+      <button type="submit" className={styles.submitButton}>Submit Review</button>
     </form>
-
   );
 };
 

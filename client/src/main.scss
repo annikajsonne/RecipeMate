@@ -1,0 +1,13 @@
+$text-color: #212529;
+
+body {
+  background: linear-gradient(to right, #e2b3ce, #d6a5e9);
+  color: $text-color;
+  margin: 20;
+  font-family: 'Times New Roman', Times, serif
+}
+
+h1 {
+  font-style: italic;
+  text-decoration: underline;
+}

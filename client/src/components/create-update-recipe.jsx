@@ -125,7 +125,7 @@ export default function CreateUpdateRecipe() {
 
   return (
     <Form onSubmit={handleSubmit} className={styles.form}>
-      <h2>{recipe ? "Update Recipe" : "Create Recipe"}</h2>
+      <h1>{recipe ? "Update Recipe" : "Create Recipe"}</h1>
       <div className={styles.formSection}>
         <label className={styles.formLabel}>
           Name:

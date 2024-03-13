@@ -11,12 +11,13 @@
 }
 
 .recipeDetailImage {
-  width: 300px; // Set a width for the image
-  height: 300px; // Set a height for the image
+  width: 500px; // Set a width for the image
+  height: 500px; // Set a height for the image
   object-fit: cover; // Ensures the image covers the area nicely
   border-radius: 4px; // Rounds the corners of the image
-  align-self: center;
+  border: 5px solid white; // Adds a white border around the image
 }
+
 
 .recipeDescription {
   color : #666
@@ -26,7 +27,7 @@
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
-  background-color: #3498db;
+  background-color: #cc73bc;
   color: white;
   text-align: center;
   text-decoration: none;
@@ -42,7 +43,7 @@
   text-overflow: ellipsis;
 
   &:hover {
-    background-color: #2874a6;
+    background-color: #c38bb9;
   }
 }
 .ingredients ul,
@@ -57,3 +58,85 @@
 }
 
 
+.noReviews {
+  font-style: italic;
+  color: #999;
+}
+
+.reviewSection {
+  margin-top: 20px; // Creates space between the reviews section and other elements
+}
+
+.reviewHeading {
+  font-size: 1.5em;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.reviewList {
+  list-style-type: none; // Removes bullets from list items
+  padding: 0;
+  margin: 0;
+}
+
+.reviewItem {
+  background-color: #f9f9f9; // Light grey background for each review
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 10px; // Creates space between reviews
+
+  .reviewContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; // Spreads out content across the horizontal space
+  }
+
+  .reviewText {
+    flex-grow: 1;
+    margin-right: 20px;
+  }
+
+  .reviewRating {
+    display: flex;
+    align-items: center;
+
+    .ratingLabel {
+      margin-right: 5px;
+    }
+
+    .ratingValue {
+      font-weight: bold;
+    }
+  }
+}
+
+.reviewForm {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.inputField,
+.textareaField {
+  padding: 8px;
+  margin: 8px 0; // Adds space between form fields
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.submitButton {
+  background-color: #5cb85c; // A green color for submit buttons
+  color: white;
+  border: none;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: #4cae4c;
+  }
+}

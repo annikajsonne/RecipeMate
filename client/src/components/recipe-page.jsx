@@ -77,11 +77,13 @@ const RecipeDetail = () => {
           <h2>Ingredients</h2>
           <ul>
             {recipe.ingredients.map((ingredient, index) => (
-              <li key={index}>{ingredient.name} - {ingredient.amount}</li>
+              <li key={index}>
+                {ingredient.name} - {ingredient.amount}
+              </li>
             ))}
           </ul>
         </div>
-  
+
         <div className="directions">
           <h2>Directions</h2>
           <ol>
@@ -90,22 +92,48 @@ const RecipeDetail = () => {
             ))}
           </ol>
         </div>
-        <Link to={`/create-update-recipe/${recipeId}`} className={styles.button}>Edit Recipe</Link>
-        <h2>User Reviews</h2>
-        <ReviewForm recipeId={recipeId} setReviews={setReviews} />
-        {reviews.length > 0 ? (
-          reviews.map((review) => (
-            <Review key={review._id} review={review} setReviews={setReviews} />
-          ))
-        ) : (
-          <p>No reviews yet.</p>
-        )}
-        <button className={styles.button} onClick={handleDelete}>Delete Recipe</button>
+        
+        <Link
+          to={`/create-update-recipe/${recipeId}`}
+          className={styles.button}
+        >
+          Edit Recipe
+        </Link>
+
+        <div className={styles.reviewSection}>
+          <h2 className={styles.reviewHeading}>User Reviews</h2>
+          <ReviewForm
+            recipeId={recipeId}
+            setReviews={setReviews}
+            className={styles.reviewForm}
+          />
+          <ul className={styles.reviewList}>
+            {reviews.length > 0 ? (
+              reviews.map((review) => (
+                <Review
+                  key={review._id}
+                  review={review}
+                  setReviews={setReviews}
+                  className={styles.reviewItem}
+                />
+              ))
+            ) : (
+              <p className={styles.noReviews}>No reviews yet.</p>
+            )}
+          </ul>
+        </div>
+
+        <button className={styles.button} onClick={handleDelete}>
+          Delete Recipe
+        </button>
       </div>
-      <img src={recipe.image} alt={recipe.name} className={styles.recipeDetailImage} />
+      <img
+        src={recipe.image}
+        alt={recipe.name}
+        className={styles.recipeDetailImage}
+      />
     </div>
   );
-
-}
+};
 
 export default RecipeDetail;

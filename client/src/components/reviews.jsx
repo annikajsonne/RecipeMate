@@ -1,18 +1,6 @@
-// const Review = ({ review }) => {
-//     return (
-//       <div>
-//         <p>{review.description}</p>
-//         <p>Rating: {review.rating}</p>
-//         <p>Reviewed by: {review.user}</p>
-//         <p>Date: {new Date(review.createdAt).toLocaleDateString()}</p>
-//       </div>
-//     );
-//   };
-
-//   export default Review;
-
 import React from 'react';
 import axios from 'axios';
+import styles from './reviews.module.scss';
 
 const Review = ({ review, setReviews }) => {
   const handleDelete = async () => {
@@ -27,11 +15,12 @@ const Review = ({ review, setReviews }) => {
   };
 
   return (
-    <div>
-      <p>{review.description}</p>
-      <p>Rating: {review.rating}</p>
-      <p>Reviewed by: {review.user}</p>
-      <p>Date: {new Date(review.createdAt).toLocaleDateString()}</p>
+    <div className={styles.review}>
+      <p className={styles.reviewUser}>Reviewed by: {review.user}</p>
+      <p className={styles.reviewDescription}>{review.description}</p>
+      <p className={styles.reviewRating}>Rating: {review.rating}</p>
+      <p className={styles.reviewDate}>Date: {new Date(review.createdAt).toLocaleDateString()}</p>
+      <button onClick={handleDelete} className={styles.reviewDeleteButton}>Delete Review</button>
     </div>
   );
 };
