@@ -1,45 +1,57 @@
 .recipeList {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.recipeCard {
+  position: relative; /* This will help position the name absolutely within the card */
+  list-style-type: none;
+  width: 200px;
+  height: 200px; /* Set a fixed height for the square */
+  margin: 0.5rem;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #dd702b;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   }
   
-  .recipeCard {
-    list-style-type: none;
-    text-align: center;
-    margin: 0.5rem;
-    overflow: hidden;
-    border-radius: 4px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    }
-    
-    a {
-      text-decoration: none;
-    }
-  }
-  
-  .recipeImage {
+  a {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Aligns the link content to the bottom */
     width: 100%;
-    height: auto;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
+    height: 100%;
+    text-decoration: none;
   }
+}
+
+.recipeImage {
+  width: 80%; /* This will make sure the image is as wide as the card */
+  height: 80%; /* This will make sure the image is as tall as the card */
+  object-fit: cover; /* This will cover the area without stretching */
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.recipeName {
+  position: absolute; /* Position the name at the bottom of the card */
+  bottom: 0;
+  width: 100%;
+  color: white;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Slight overlay to improve readability */
+  text-align: center;
   
-  .recipeName {
-    background-color: #dd702b;
-    color: white;
-    padding: 0.5rem 1rem;
-    margin: 0;
-    
-    &:hover,
-    &:focus {
-      background-color: #d89367;
-    }
+  &:hover,
+  &:focus {
+    background-color: #d89367;
   }
-  
+}
