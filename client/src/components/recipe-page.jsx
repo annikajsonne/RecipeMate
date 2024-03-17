@@ -11,6 +11,8 @@ const RecipeDetail = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [reviews, setReviews] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editReview, setEditReview] = useState(null);
   const navigate = useNavigate();
 
   const handleDelete = async () => {
@@ -30,6 +32,11 @@ const RecipeDetail = () => {
         setError(err.message);
       }
     }
+  };
+
+  const handleEdit = (review) => {
+    setEditReview(review);
+    setIsEditing(true);
   };
 
   useEffect(() => {
@@ -101,31 +108,47 @@ const RecipeDetail = () => {
         </Link>
 
         <div className={styles.reviewSection}>
-          <h2 className={styles.reviewHeading}>User Reviews</h2>
+        <h2 className={styles.reviewHeading}>User Reviews</h2>
+        {isEditing ? (
           <ReviewForm
             recipeId={recipeId}
             setReviews={setReviews}
+            isEditing={isEditing}
+            setIsEditing={setIsEditing}
+            editReview={editReview}
             className={styles.reviewForm}
           />
-          <ul className={styles.reviewList}>
-            {reviews.length > 0 ? (
-              reviews.map((review) => (
-                <Review
-                  key={review._id}
-                  review={review}
-                  setReviews={setReviews}
-                  className={styles.reviewItem}
-                />
-              ))
-            ) : (
-              <p className={styles.noReviews}>No reviews yet.</p>
-            )}
-          </ul>
-        </div>
+        ) : (
+          <>
+            <ReviewForm
+              recipeId={recipeId}
+              setReviews={setReviews}
+              className={styles.reviewForm}
+            />
+            <ul className={styles.reviewList}>
+              {reviews.length > 0 ? (
+                reviews.map((review) => (
+                  <Review
+                    key={review._id}
+                    review={review}
+                    setReviews={setReviews}
+                    setIsEditing={setIsEditing}
+                    setEditReview={setEditReview}
+                    handleEdit={handleEdit}
+                    className={styles.reviewItem}
+                  />
+                ))
+              ) : (
+                <p className={styles.noReviews}>No reviews yet.</p>
+              )}
+            </ul>
+          </>
+        )}
+      </div>
 
-        <button className={styles.button} onClick={handleDelete}>
-          Delete Recipe
-        </button>
+      <button className={styles.button} onClick={handleDelete}>
+        Delete Recipe
+      </button>
       </div>
       <img
         src={recipe.image}
