@@ -23,7 +23,7 @@ body {
   
   .navItem {
     text-decoration: none;
-    font-style: normal;
+    font-weight: bold;
     color: rgb(0, 0, 0);
     padding: 0.5rem 1rem;
     transition: background-color 0.3s;
