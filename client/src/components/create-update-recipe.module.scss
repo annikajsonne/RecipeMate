@@ -76,7 +76,7 @@
     border-radius: 4px;
     cursor: pointer;
     margin-left: 5px;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: "Lucida Console", "Courier New", monospace;
   }
   
   .removeButton:hover, .addButton:hover {
@@ -84,25 +84,25 @@
   }
   
   .addButton {
-    background-color: #a24fd9;
+    background-color: #ba8cdd;
     margin-bottom: 20px;
   }
   
   .addButton:hover {
-    background-color: #b57ed9;
+    background-color: #e36b9b;
   }
   
   .formSubmitButton {
     width: 100%;
     padding: 10px 15px;
     border: none;
-    background-color: #ab3363;
+    background-color: #5aa87e;
     color: white;
     font-size: 16px;
     font-weight: bold;
     border-radius: 4px;
     cursor: pointer;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: "Lucida Console", "Courier New", monospace;
   }
   
   .formSubmitButton:hover {

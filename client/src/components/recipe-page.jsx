@@ -77,6 +77,11 @@ const RecipeDetail = () => {
     <div className={styles.recipeDetailContainer}>
       <div className={styles.recipeDetailTextContent}>
         <h1>{recipe.name}</h1>
+        <img
+        src={recipe.image}
+        alt={recipe.name}
+        className={styles.recipeDetailImage}
+        />
         <p>{recipe.description}</p>
         <p>Prep Time: {recipe.prepTime} minutes</p>
         <p>Cook Time: {recipe.cookTime} minutes</p>
@@ -150,11 +155,6 @@ const RecipeDetail = () => {
         Delete Recipe
       </button>
       </div>
-      <img
-        src={recipe.image}
-        alt={recipe.name}
-        className={styles.recipeDetailImage}
-      />
     </div>
   );
 };
