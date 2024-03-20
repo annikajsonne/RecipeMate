@@ -43,7 +43,9 @@ const ReviewForm = ({ recipeId, setReviews, isEditing, setIsEditing, editReview 
         } else {
           setReviews(prevReviews => [...prevReviews, response.data]);
         }
-        setIsEditing(false); // Reset editing state
+        if(isEditing) {
+          setIsEditing(false);
+        }
         alert('Review saved successfully!');
         e.target.reset(); // Reset form fields
       } else {
